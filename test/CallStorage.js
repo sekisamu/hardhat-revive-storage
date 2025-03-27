@@ -10,13 +10,10 @@ describe("1st Storage", function () {
   });
 
   it("Should fail to deploy storage", async function () {
-    let r = await callStorage.newStorage(1, 2);
-    await expect(r).to.be.revertedWithPanic;
-    await expect(r).to.emit(callStorage, "StorageDeployed");
+    await expect(callStorage.newStorage(1, 2)).to.be.rejectedWith("CodeNotFound");
   });
 
   it("Should deploy storage successfully", async function () {
-
     const Storage = await ethers.getContractFactory("Storage");
     storage = await Storage.deploy(3);
     await storage.waitForDeployment();
