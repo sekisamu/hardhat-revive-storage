@@ -10,7 +10,9 @@ describe("1st Storage", function () {
   });
 
   it("Should fail to deploy storage", async function () {
-    expect(await callStorage.newStorage(1, 2)).to.be.revertedWithPanic;
+    let r = await callStorage.newStorage(1, 2);
+    await expect(r).to.be.revertedWithPanic;
+    await expect(r).to.emit(callStorage, "StorageDeployed");
   });
 
   it("Should deploy storage successfully", async function () {
