@@ -1,9 +1,7 @@
 const { expect } = require("chai");
 
-describe("Storage", function () {
-  let storage;
+describe("1st Storage", function () {
   let callStorage;
-  const initialValue = 42;
 
   beforeEach(async function () {
     const CallStorage = await ethers.getContractFactory("CallStorage");
@@ -12,14 +10,17 @@ describe("Storage", function () {
   });
 
   it("Should fail to deploy storage", async function () {
-    await expect(callStorage.newStorage(1, 2)).to.be.revertedWithPanic;
+    expect(await callStorage.newStorage(1, 2)).to.be.revertedWithPanic;
   });
 
   it("Should deploy storage successfully", async function () {
+
     const Storage = await ethers.getContractFactory("Storage");
-    storage = await Storage.deploy(1);
+    storage = await Storage.deploy(3);
     await storage.waitForDeployment();
+
     await callStorage.newStorage(1, 2);
-    console.log(await callStorage.storageAddress());
+    expect(await callStorage.storageAddress()).to.not.equal(0);
   });
 });
+

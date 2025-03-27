@@ -22,9 +22,8 @@ module.exports = {
       allowUnlimitedContractSize: true,
     },
     polkavm: {
-      // gas: "auto",
-      // gasPrice: "auto",
-      blockGasLimit: 3000000000,
+      gas: "auto",
+      gasPrice: "auto",
       // hardfork: "london",      
       polkavm: true,
       url: 'http://127.0.0.1:8545',
