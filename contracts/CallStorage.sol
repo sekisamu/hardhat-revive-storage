@@ -4,8 +4,6 @@ pragma solidity ^0.8.19;
 import "./Storage.sol";
 
 contract CallStorage {
-
-    bytes public storageCode;
     address public storageAddress;
 
     event StorageDeployed(address indexed storageAddress);
@@ -17,7 +15,7 @@ contract CallStorage {
         emit StorageDeployed(storageAddress);
     }
 
-    function setStorageCode() public {
-        storageCode = type(Storage).creationCode;
+    function getStorageCode() public pure returns (bytes memory) {
+        return type(Storage).creationCode;
     }
 }

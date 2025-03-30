@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 
-describe("1st Storage", function () {
+describe("Storage Creation", function () {
   let callStorage;
 
   beforeEach(async function () {
@@ -20,6 +20,22 @@ describe("1st Storage", function () {
 
     await callStorage.newStorage(1, 2);
     expect(await callStorage.storageAddress()).to.not.equal(0);
+  });
+});
+
+
+describe("Storage Code", function () {
+  let callStorage;
+
+  beforeEach(async function () {
+    const CallStorage = await ethers.getContractFactory("CallStorage");
+    callStorage = await CallStorage.deploy();
+    await callStorage.waitForDeployment();
+  });
+
+  it("Should get a hash", async function () {
+    const storageCode = await callStorage.getStorageCode();
+    expect(storageCode.length).to.be.equal(66);
   });
 });
 
