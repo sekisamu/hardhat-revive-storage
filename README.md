@@ -1,13 +1,37 @@
-# Sample Hardhat Project
+# hardhat-revive-storage
+## Prerequisites
+Ensure that you have substrate-node and eth-rpc binaries on your local machine. If not, follow these instructions to install them:
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
+```bash
+git clone https://github.com/paritytech/polkadot-sdk
+cd polkadot-sdk
+cargo build --bin substrate-node --release
+cargo build -p pallet-revive-eth-rpc --release
 ```
+Once the build is complete, you will find both binaries in the `./target/release` directory.
+
+Start the network by running:
+
+```bash
+./target/release/substrate-node --dev
+./target/release/eth-rpc --dev
+```
+
+## How to Initialize
+```bash
+git clone https://github.com/sekisamu/hardhat-revive-storage
+npm install
+```
+Open the `hardhat.config.js` file and update the following fields under networks -> hardhat:
+
+nodeBinaryPath: Set this to the local path of your substrate-node binary.
+
+adapterBinaryPath: Set this to the local path of your eth-rpc binary.
+
+Ensure that both paths correctly point to the respective executable files.
+
+How to Test
+```bash
+npx hardhat test --network polkavm
+```
+Note: You need to restart the network and rpc endpoint after each test.
