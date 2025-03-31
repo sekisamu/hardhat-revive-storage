@@ -32,6 +32,10 @@ Ensure that both paths correctly point to the respective executable files.
 
 How to Test
 ```bash
-npx hardhat test --network polkavm
+# For PolkaVM chains
+USE_RESOLC=true npx hardhat test --network polkavm
+
+# For EVM chains
+npx hardhat test --network sepolia
 ```
 Note: You need to restart the network and rpc endpoint after each test.

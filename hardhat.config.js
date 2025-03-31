@@ -1,9 +1,13 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("@nomicfoundation/hardhat-ignition");
-
-require("hardhat-resolc");
 require("hardhat-revive-node")
 require("dotenv").config();
+
+const USE_RESOLC = process.env.USE_RESOLC === 'true';
+if (USE_RESOLC) {
+  require("hardhat-resolc");
+}
+
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -22,6 +26,7 @@ module.exports = {
       },
       allowUnlimitedContractSize: true,
     },
+
     polkavm: {
       gas: "auto",
       gasPrice: "auto",
@@ -36,20 +41,44 @@ module.exports = {
         url: "https://westend-asset-hub-eth-rpc.polkadot.io",
         accounts: [process.env.AH_PRIV_KEY, process.env.LOCAL_PRIV_KEY],
      },
+
+     sepolia: {
+      url: "https://eth-sepolia.public.blastapi.io",
+      accounts: [process.env.LOCAL_PRIV_KEY],
+     },
+
+     moonbeam: {
+      url: "https://moonbeam.api.onfinality.io/public",
+      accounts: [process.env.LOCAL_PRIV_KEY],
+     },
   },
 
-  // using remix compiler
-  resolc: {
-    version: "1.5.2",
-    compilerSource: "remix",
-    settings: {
-      optimizer: {
-        enabled: false,
-        runs: 600,
+  ...(USE_RESOLC ? {
+    resolc: {
+      version: "1.5.2",
+      compilerSource: "remix",
+      settings: {
+        optimizer: {
+          enabled: false,
+          runs: 600,
+        },
+        evmVersion: "istanbul",
       },
-      evmVersion: "istanbul",
-    },
-  },
+    }
+  } : {})
+
+  // // using remix compiler
+  // resolc: {
+  //   version: "1.5.2",
+  //   compilerSource: "remix",
+  //   settings: {
+  //     optimizer: {
+  //       enabled: false,
+  //       runs: 600,
+  //     },
+  //     evmVersion: "istanbul",
+  //   },
+  // },
   
   // using binary compiler
   // resolc: {

@@ -7,6 +7,8 @@ describe("Storage Creation", function () {
     const CallStorage = await ethers.getContractFactory("CallStorage");
     callStorage = await CallStorage.deploy();
     await callStorage.waitForDeployment();
+    let [deployer, other] = await ethers.getSigners();
+    console.log("deployer address", deployer.address);
   });
 
   it("Should fail to deploy storage", async function () {
