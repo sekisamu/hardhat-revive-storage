@@ -48,7 +48,7 @@ module.exports = {
      },
 
      moonbase: {
-      url: 'https://rpc.moonbase.moonbeam.network',
+      url: 'https://rpc.api.moonbase.moonbeam.network',
       accounts: [process.env.LOCAL_PRIV_KEY],
     },
 
