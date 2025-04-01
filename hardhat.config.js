@@ -47,11 +47,10 @@ module.exports = {
       accounts: [process.env.LOCAL_PRIV_KEY],
      },
 
-     moonbeam: {
-      url: "https://moonbeam.api.onfinality.io/public",
+     moonbase: {
+      url: 'https://rpc.moonbase.moonbeam.network',
       accounts: [process.env.LOCAL_PRIV_KEY],
-     },
-  },
+    },
 
   ...(USE_RESOLC ? {
     resolc: {
